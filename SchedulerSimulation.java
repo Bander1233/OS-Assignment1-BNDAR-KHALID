@@ -30,6 +30,9 @@ class Process implements Runnable {
     private int timeQuantum; // Time slice (time quantum) allowed per CPU access (in milliseconds)
     private int remainingTime; // Time left for the process to finish its execution
     private int priority; // Feature 1: Add Priority
+    // Feature 3: Add waiting time tracking fields
+    private long arrivalTime;
+    private long waitingTime;
 
     // Constructor to initialize the process with name, burst time, and time quantum
     public Process(String name, int burstTime, int timeQuantum, int priority) {
@@ -38,6 +41,9 @@ class Process implements Runnable {
         this.timeQuantum = timeQuantum;
         this.remainingTime = burstTime; // Initially, remaining time is equal to the burst time
         this.priority = priority; // Feature 1: Set priority
+        // Feature 3: Initialize time tracking fields
+        this.arrivalTime = System.currentTimeMillis();
+        this.waitingTime = 0;
     }
 
     // This method will be called when the thread for this process is started
@@ -149,6 +155,27 @@ class Process implements Runnable {
     public int getPriority() {
         return priority;
     }
+
+    // feature 3: Get total waiting time of the process
+    public long getWaitingTime() {
+        return waitingTime;
+        // Feature 3: Add waiting time to the process
+
+    }
+
+    public void addWaitingTime(long time) {
+        this.waitingTime += time;
+    }
+
+    // Feature 3: Get arrival time
+    public long getArrivalTime() {
+        return arrivalTime;
+    }
+
+    // Feature 3: Update arrival time
+    public void setArrivalTime(long time) {
+        this.arrivalTime = time;
+    }
 }
 
 public class SchedulerSimulation {
@@ -253,6 +280,8 @@ public class SchedulerSimulation {
             }
             System.out.println(Colors.BRIGHT_WHITE + "]" + Colors.RESET);
             System.out.println(Colors.BOLD + Colors.MAGENTA + "└" + "─".repeat(79) + Colors.RESET + "\n");
+            // Feature 3: Record the time when the process starts execution
+            long startTime = System.currentTimeMillis();
 
             // Start the thread, which will run the process for one time quantum
             currentThread.start();
@@ -264,10 +293,14 @@ public class SchedulerSimulation {
             } catch (InterruptedException e) {
                 System.out.println("Main thread interrupted.");
             }
-
+            // Feature 3: Record the time when execution finishes
+            long endTime = System.currentTimeMillis();
             // Retrieve the process associated with the thread from the map
             Process process = processMap.get(currentThread);
-
+            // Feature 3: Calculate waiting time
+            process.addWaitingTime(startTime - process.getArrivalTime());
+            // Feature 3: Update arrival time for the next round
+            process.setArrivalTime(endTime);
             // Check if the process is not finished
             if (!process.isFinished()) {
                 // If the process still has remaining time, check if there are more processes in
@@ -297,6 +330,14 @@ public class SchedulerSimulation {
                 "╚════════════════════════════════════════════════════════════════════════════════╝" +
                 Colors.RESET + "\n");
         System.out.println("Total context switches: " + contextSwitches);
+        // Feature 3: Display waiting time summary
+        System.out.println("\n========== Waiting Time Summary ==========");
+        System.out.println("Process | Burst Time | Waiting Time");
+        for (Process p : processMap.values()) {
+            System.out.println(p.getName() + " | "
+                    + p.getBurstTime() + " | "
+                    + p.getWaitingTime());
+        }
     }
 
     // Method to add a process to the queue and map, while printing a "ready"
