@@ -32,90 +32,105 @@ Document your development process as you work on the assignment. Add entries sho
 
 ## Your Development Log:
 
-### Entry 1 - [Date and Time]
-**What I did**: 
+### Entry 1 - [mar 28, 2026, 10:26 PM]
+**What I did**:Configure the project and execute the first code. 
 
-**Details**: 
+**Details**:opened Visual Studio Code and started the project.
+examined the classes (Process, SchedulerSimulation) and code structure.
+The student ID in the main output area was updated.
+successfully compiled and executed the application to comprehend the fundamental behavior 
 
-**Challenges**: 
+**Challenges**:I was initially unfamiliar with the scheduler simulation's operation. 
 
-**Solution**: 
+**Solution**:Go over the code carefully and see the results step-by-step. 
 
-**Time spent**: 
-
----
-
-### Entry 2 - [Date and Time]
-**What I did**: 
-
-**Details**: 
-
-**Challenges**: 
-
-**Solution**: 
-
-**Time spent**: 
+**Time spent**:40 minutes 
 
 ---
 
-### Entry 3 - [Date and Time]
-**What I did**: 
+### Entry 2 - [mar 30, 2026, 11:26 AM]
+**What I did**:Implemented Feature 1 (Process Priority) 
 
-**Details**: 
+**Details**: The Process class now has a priority property.
+Priority was added to the constructor.
+Random priority values (1–5) were generated.
+When adding processes to the queue, the output was updated to show priority.
 
-**Challenges**: 
+**Challenges**: Knowing where to set the priority without causing code errors
 
-**Solution**: 
+**Solution**: added the value at process creation and tracked object creation in main().
 
-**Time spent**: 
-
----
-
-### Entry 4 - [Date and Time]
-**What I did**: 
-
-**Details**: 
-
-**Challenges**: 
-
-**Solution**: 
-
-**Time spent**: 
+**Time spent**: 50 minutes
 
 ---
 
-### Entry 5 - [Date and Time]
-**What I did**: 
+### Entry 3 - [mar 30, 2026, 10:26 PM]
+**What I did**:Implemented Feature 2 (Context Switch Counter) 
 
-**Details**: 
+**Details**: A static counter variable was added.
+increased it each time a process began to run.
+Total context shifts were printed at the program's conclusion.
 
-**Challenges**: 
+**Challenges**:Choosing where the counter should be increased 
 
-**Solution**: 
+**Solution**:put it ahead of the current thread.start() within the scheduler loop 
 
-**Time spent**: 
+**Time spent**:35 minutes 
 
 ---
 
-### Entry 6 - [Optional - Date and Time]
-**What I did**: 
+### Entry 4 - [Apr 1, 2026, 9:02 PM]
+**What I did**: Implemented Feature 3 (Waiting Time Tracking)
 
-**Details**: 
+**Details**: ArrivalTime and WaitingTime variables were added.
+utilized the system.To monitor execution time, use currentTimeMillis().
+Waiting time was computed using startArrival time
+After every execution, the arrival time was updated.
 
-**Challenges**: 
+**Challenges**: Errors were found in private variables.
 
-**Solution**: 
+**Solution**: Used getter and setter methods to access and update values correctly
 
-**Time spent**: 
+**Time spent**: 1 hour
+
+---
+
+### Entry 5 - [Apr 1, 2026, 10:15 PM]
+**What I did**:Tested and debugged the full program 
+
+**Details**: ran the simulation several times.
+Verified output accuracy (waiting time, execution order, queue behavior)
+corrected duplicate items and made sure the summary table was accurate.
+
+**Challenges**: In the output, a few values were duplicated.
+
+**Solution**: Loop logic was reviewed, and each procedure was accurately printed once.
+
+**Time spent**: 45 minutes
+
+---
+
+### Entry 6 - [Optional - Apr 2, 2026, 5:15 PM]
+**What I did**: Completed documentation (ANSWERS & REFLECTION)
+
+**Details**: All conceptual questions were addressed.
+Connected responses to the code and real output
+wrote a reflection based on what I had learned.
+
+**Challenges**: Writing clear academic answers in English
+
+**Solution**: Structured answers using course concepts and examples from output
+
+**Time spent**: 2 hour and 30 minutes
 
 ---
 
 ## Summary
 
-**Total time spent on assignment**: [X hours]
+**Total time spent on assignment**: [7 hours]
 
-**Most challenging part**: 
+**Most challenging part**:Implementing the waiting time feature and precisely positioning the code inside the scheduler loop proved to be the most difficult portion. Timing logic and thread execution sequence have to be understood. 
 
-**Most interesting learning**: 
+**Most interesting learning**: Seeing Round-Robin scheduling in action and how threads mimic actual CPU activity was the most fascinating aspect.
 
-**What I would do differently next time**: 
+**What I would do differently next time**: The next time, rather than waiting until the very end, I would design the features in advance and test each component right away after implementation.
